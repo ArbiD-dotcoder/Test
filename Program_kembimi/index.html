@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Euro-Albanian Lek Exchange</title>
+</head>
+<body style="font-family: sans-serif; padding: 20px;">
+
+    <h1 style="text-align: center;">Currency Exchange</h1>
+
+    <form action="exchange.php" method="post" style="max-width: 400px; margin: 0 auto; padding: 15px; border: 1px solid #ccc;">
+        
+        <h3>User Information</h3>
+        
+        <label for="username">Username:</label><br>
+        <input type="text" name="username" id="username" required style="width: 100%; margin-bottom: 10px;"><br>
+        
+        <label for="age">Age:</label><br>
+        <input type="number" name="age" id="age" required style="width: 100%; margin-bottom: 10px;"><br>
+        
+        <label for="email">Email:</label><br>
+        <input type="email" name="email" id="email" required style="width: 100%; margin-bottom: 15px;"><br>
+
+        <h3>Exchange Information</h3>
+        
+        <label for="value">Value:</label><br>
+        <input type="number" step="0.01" name="value" id="value" required style="width: 100%; margin-bottom: 10px;"><br>
+        
+        <label for="coefficient">Exchange Coefficient:</label><br>
+        <input type="number" step="0.0001" name="coefficient" id="coefficient" required style="width: 100%; margin-bottom: 10px;"><br>
+        
+        <label for="direction">Exchange Direction:</label><br>
+        <select name="direction" id="direction" style="width: 100%; margin-bottom: 15px;">
+            <option value="eur_to_all">Euro to Albanian Lek</option>
+            <option value="all_to_eur">Albanian Lek to Euro</option>
+        </select><br>
+
+        <button type="submit" style="width: 100%; padding: 8px;">Submit</button>
+    </form>
+</body>
+</html>
