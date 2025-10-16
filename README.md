@@ -21,13 +21,11 @@ This is a simple web-based currency exchange application that allows users to co
 
 ## File Structure
 
-```
 /currency-exchange/
 │
 ├── index.html          # Main UI (or index.php if integrated)
 ├── convert.php         # PHP script to handle conversion
 └── README.md           # Project documentation
-```
 
 ---
 
