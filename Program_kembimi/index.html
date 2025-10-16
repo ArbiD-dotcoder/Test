@@ -1,36 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Currency Exchange Form</title>
+  <meta charset="UTF-8" />
+  <title>Currency Exchange</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      padding: 40px;
+    }
+    form {
+      background-color: #fff;
+      padding: 20px;
+      max-width: 400px;
+      margin: auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #05898b;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    #result {
+      max-width: 400px;
+      margin: 20px auto;
+    }
+  </style>
 </head>
-<body style="font-family: Arial, sans-serif; background-color: #f2f2f2; padding: 40px;">
+<body>
 
-    <h1 style="color: #333; text-align: center;">Currency Exchange</h1>
+  <h1 style="color:hsl(0,0%,44%); text-align:center;">Currency Exchange</h1>
 
-    <form action="exchange.php" method="POST" style="background-color: #fff; padding: 20px; max-width: 400px; margin: auto; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+  <form id="exchangeForm" action="converter.php" method="POST">
+    <label for="value">Amount:</label>
+    <input type="number" step="0.01" id="value" name="value" required>
 
-        <label for="value" style="display: block; margin-bottom: 5px; color: #555;">Amount to exchange:</label>
-        <input type="number" step="0.01" id="value" name="value" required
-               style="width: 100%; padding: 8px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;">
+    <label for="from_currency">From Currency:</label>
+    <select id="from_currency" name="from_currency" required>
+      <option value="EUR">EUR - Euro</option>
+      <option value="USD">USD - US Dollar</option>
+      <option value="JPY">JPY - Japanese Yen</option>
+      <option value="GBP">GBP - British Pound</option>
+      <option value="AUD">AUD - Australian Dollar</option>
+      <option value="CAD">CAD - Canadian Dollar</option>
+      <option value="CHF">CHF - Swiss Franc</option>
+      <option value="CNY">CNY - Chinese Yuan</option>
+      <option value="HKD">HKD - Hong Kong Dollar</option>
+      <option value="NZD">NZD - New Zealand Dollar</option>
+      <option value="SEK">SEK - Swedish Krona</option>
+    </select>
 
-        <label for="coefficient" style="display: block; margin-bottom: 5px; color: #555;">Exchange rate:</label>
-        <input type="number" step="0.01" id="coefficient" name="coefficient" required
-               style="width: 100%; padding: 8px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;">
+    <label for="to_currency">To Currency:</label>
+    <select id="to_currency" name="to_currency" required>
+      <option value="EUR">EUR - Euro</option>
+      <option value="USD">USD - US Dollar</option>
+      <option value="JPY">JPY - Japanese Yen</option>
+      <option value="GBP">GBP - British Pound</option>
+      <option value="AUD">AUD - Australian Dollar</option>
+      <option value="CAD">CAD - Canadian Dollar</option>
+      <option value="CHF">CHF - Swiss Franc</option>
+      <option value="CNY">CNY - Chinese Yuan</option>
+      <option value="HKD">HKD - Hong Kong Dollar</option>
+      <option value="NZD">NZD - New Zealand Dollar</option>
+      <option value="SEK">SEK - Swedish Krona</option>
+    </select>
 
-        <label style="display: block; margin-bottom: 5px; color: #555;">Direction:</label>
+    <button type="submit">Exchange</button>
+  </form>
 
-        <input type="radio" id="eur_to_all" name="direction" value="eur_to_all" required>
-        <label for="eur_to_all" style="margin-right: 15px;">EUR to ALL</label>
+  <div id="result"></div>
 
-        <input type="radio" id="all_to_eur" name="direction" value="all_to_eur">
-        <label for="all_to_eur">ALL to EUR</label><br><br>
+  <script>
+    const form = document.getElementById('exchangeForm');
+    const resultDiv = document.getElementById('result');
 
-        <button type="submit"
-                style="background-color: #05898b; color: white; padding: 10px 20px; border: none;
-                       border-radius: 4px; cursor: pointer; font-size: 16px;">
-            Exchange
-        </button>
-    </form>
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+
+      const response = await fetch('converter.php', {
+        method: 'POST',
+        body: formData
+      });
+
+      const resultHtml = await response.text();
+      resultDiv.innerHTML = resultHtml;
+    });
+  </script>
+
 </body>
 </html>
